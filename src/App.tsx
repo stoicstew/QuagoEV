@@ -1,46 +1,32 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
-import Login from './components/Login';
-import Callback from './components/Callback';
-import Layout from './components/Layout';
-import Dashboard from './components/Dashboard';
-import BatteryHealth from './components/BatteryHealth';
-import CostAnalytics from './components/CostAnalytics';
-import TripHistory from './components/TripHistory';
-import Automations from './components/Automations';
-import SleepScore from './components/SleepScore';
-import Settings from './components/Settings';
+import { useMemo, useState } from 'react';
+import { useData } from './state/DataContext';
+import { clock, date, inPeriod, type Period } from './data/format';
+import { Battery, Charging, Drives, Insights, Overview, type AnalyticsData } from './views/Analytics';
+import { SettingsView, Welcome } from './views/Connection';
+import { Icon, type IconName } from './views/shared';
 
-function ProtectedRoute({ children }: { children: React.ReactNode }) {
-  const { authenticated, loading } = useAuth();
-  if (loading) return <div className="loading-screen"><div className="spinner" /><p>Loading QuagoEV...</p></div>;
-  if (!authenticated) return <Navigate to="/login" replace />;
-  return <>{children}</>;
-}
+type View = 'overview' | 'drives' | 'charging' | 'battery' | 'insights' | 'settings';
+const navigation: Array<{ id: View; label: string; icon: IconName; subtitle: string }> = [
+  { id: 'overview', label: 'Overview', icon: 'overview', subtitle: 'The bigger picture of your everyday driving.' },
+  { id: 'drives', label: 'Drives', icon: 'drives', subtitle: 'Every journey, with a little more perspective.' },
+  { id: 'charging', label: 'Charging', icon: 'charging', subtitle: 'Know where your energy and money go.' },
+  { id: 'battery', label: 'Battery', icon: 'battery', subtitle: 'Follow your battery’s story over time.' },
+  { id: 'insights', label: 'Insights', icon: 'insights', subtitle: 'Find the patterns in your ownership.' },
+  { id: 'settings', label: 'Settings', icon: 'settings', subtitle: 'Your connection, preferences and data.' },
+];
 
 export default function App() {
-  return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/callback" element={<Callback />} />
-      <Route
-        path="/*"
-        element={
-          <ProtectedRoute>
-            <Layout>
-              <Routes>
-                <Route path="/" element={<Dashboard />} />
-                <Route path="/battery" element={<BatteryHealth />} />
-                <Route path="/costs" element={<CostAnalytics />} />
-                <Route path="/trips" element={<TripHistory />} />
-                <Route path="/automations" element={<Automations />} />
-                <Route path="/sleep" element={<SleepScore />} />
-                <Route path="/settings" element={<Settings />} />
-              </Routes>
-            </Layout>
-          </ProtectedRoute>
-        }
-      />
-    </Routes>
-  );
+  const { snapshot, profile, mode, status, error, storageWarning, syncedAt, busy, ready, refresh, exitDemo } = useData();
+  const [view, setView] = useState<View>('overview'); const [period, setPeriod] = useState<Period>('30'); const [vehicleId, setVehicleId] = useState('all');
+  const current = navigation.find(n => n.id === view)!;
+  const data = useMemo<AnalyticsData | null>(() => {
+    if (!snapshot) return null;
+    const selectedId = snapshot.vehicles.some(v => v.id === vehicleId) ? vehicleId : 'all';
+    const matches = (id: string) => selectedId === 'all' || id === selectedId;
+    const now = mode === 'demo' ? snapshot.generatedAt : Date.now();
+    const within = (timestamp: number) => inPeriod(timestamp, period, now, snapshot.settings.timeZone);
+    return { snapshot, vehicles: snapshot.vehicles.filter(v => matches(v.id)), trips: snapshot.trips.filter(t => matches(t.vehicleId) && within(t.startTime)), charges: snapshot.charges.filter(c => matches(c.vehicleId) && within(c.startTime)), battery: snapshot.battery.filter(b => matches(b.vehicleId) && within(b.timestamp)), idles: snapshot.idles.filter(i => matches(i.vehicleId) && within(i.startTime)) };
+  }, [snapshot, vehicleId, period, mode]);
+  const connectionLabel = mode === 'demo' ? 'Sample data' : status === 'connected' ? 'Server connected' : status === 'syncing' ? 'Syncing history' : status === 'auth' ? 'Access key needed' : profile ? 'Saved history' : 'Not connected';
+  return <div className="app-shell"><aside className="sidebar"><a className="brand" href="#" onClick={e => { e.preventDefault(); setView('overview'); }} aria-label="QuagoEV overview"><span className="brand-symbol"><Icon name="bolt" size={24}/></span><span>Quago<span className="brand-light">EV</span></span></a><div className="sidebar-caption">OWNERSHIP, UNDERSTOOD</div><nav aria-label="Main navigation">{navigation.map(n => <button key={n.id} className={`nav-item ${view === n.id ? 'active' : ''}`} onClick={() => setView(n.id)} aria-current={view === n.id ? 'page' : undefined}><Icon name={n.icon}/><span>{n.label}</span>{view === n.id && <span className="nav-active-mark"/>}</button>)}</nav><div className="sidebar-bottom"><div className="server-status"><span className={`server-icon ${status === 'connected' && mode !== 'demo' ? 'connected' : ''}`}><Icon name={status === 'offline' ? 'offline' : 'cloud'} size={20}/></span><div><strong>{connectionLabel}</strong><small>{mode === 'demo' ? 'Explore with example records' : 'Your personal data server'}</small></div></div><div className="sidebar-footnote">Read-only Tesla companion<span>QuagoEV · Personal edition</span></div></div></aside><main className="main"><header className="topbar"><span className="topbar-label">Your Tesla, understood.</span><div className="topbar-right">{mode === 'demo' ? <><span className="demo-badge">Sample data</span><button className="text-button" onClick={() => { void exitDemo(); }}>Exit demo</button></> : <><span className={`connection-pill ${status === 'connected' ? 'is-connected' : ''}`}><span className="status-dot"/>{connectionLabel}</span><button className={`icon-button ${busy ? 'spinning' : ''}`} aria-label="Sync saved data from server" disabled={busy || !profile || status === 'auth'} onClick={() => { void refresh(); }}><Icon name="refresh" size={18}/></button></>}</div></header><div className="main-inner">{!ready ? <div className="startup"><span className="spinner"/><p>Opening your saved history…</p></div> : !snapshot && view !== 'settings' ? <><Welcome/>{error && <p className="notice warning" role="status">{error}</p>}</> : <><div className="page-heading"><div><span className="eyebrow">QUAGOEV / {current.label.toUpperCase()}</span><h1>{current.label}</h1><p>{current.subtitle}</p></div>{view !== 'settings' && snapshot && <div className="page-filters">{snapshot.vehicles.length > 1 && <label><span className="sr-only">Vehicle</span><select aria-label="Vehicle" value={snapshot.vehicles.some(v => v.id === vehicleId) ? vehicleId : 'all'} onChange={e => setVehicleId(e.target.value)}><option value="all">All vehicles</option>{snapshot.vehicles.map(v => <option value={v.id} key={v.id}>{v.name}</option>)}</select></label>}<label><span className="sr-only">Date range</span><select aria-label="Date range" value={period} onChange={e => setPeriod(e.target.value as Period)}><option value="7">Last 7 days</option><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="all">All history</option></select></label></div>}</div>{mode === 'demo' && <div className="notice sample"><Icon name="insights" size={17}/><span>Sample data · Explore the interface. These records are separate from your vehicle history.</span></div>}{error && mode !== 'demo' && <div className="notice warning" role="status"><Icon name="offline" size={17}/><span>{error}</span>{status === 'auth' && <button className="text-button" onClick={() => setView('settings')}>Reconnect</button>}</div>}{storageWarning && <div className="notice warning" role="alert">{storageWarning}</div>}{data && view === 'overview' && <Overview data={data} navigate={setView}/ >}{data && view === 'drives' && <Drives data={data}/ >}{data && view === 'charging' && <Charging data={data}/ >}{data && view === 'battery' && <Battery data={data}/ >}{data && view === 'insights' && <Insights data={data}/ >}{view === 'settings' && <SettingsView/>}{snapshot && <footer className="page-footer"><span>{mode === 'demo' ? 'Illustrative records · sample mode' : syncedAt ? `Last synced ${date(syncedAt, snapshot.settings.timeZone)} at ${clock(syncedAt, snapshot.settings.timeZone)}` : 'Saved data'}<span className="footer-dot">·</span>{snapshot.settings.timeZone.replaceAll('_', ' ')}</span><span>km · °C · {snapshot.settings.currency}</span></footer>}</>}</div></main></div>;
 }

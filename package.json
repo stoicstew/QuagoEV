@@ -1,6 +1,6 @@
 {
   "name": "quagoev",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,17 @@
     "dev:client": "vite",
     "dev:server": "node --watch server/index.js",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server/index.js",
+    "server:init": "node scripts/server-setup.mjs init",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs electron/security.test.cjs",
+    "test:browser": "playwright test",
+    "desktop:dev": "electron electron/main.cjs",
+    "desktop:dir": "npm run build && electron-builder --config electron-builder.config.cjs --dir",
+    "desktop:mac": "npm run build && electron-builder --config electron-builder.config.cjs --mac zip --arm64 --x64",
+    "desktop:win": "npm run build && electron-builder --config electron-builder.config.cjs --win zip --x64",
+    "server:package": "node scripts/package-server.mjs"
   },
   "dependencies": {
     "chart.js": "^4.4.7",
@@ -23,10 +33,21 @@
     "react-router-dom": "^7.1.1"
   },
   "devDependencies": {
+    "@playwright/test": "^1.65.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "electron": "^45.2.3",
+    "electron-builder": "^26.18.0",
     "typescript": "^5.7.3",
     "vite": "^6.0.7"
+  },
+  "main": "electron/main.cjs",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "overrides": {
+    "qs": "6.17.1",
+    "minimatch@>=7": "11.0.5"
   }
 }

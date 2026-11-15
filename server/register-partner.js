@@ -28,7 +28,7 @@ async function register() {
       grant_type: 'client_credentials',
       client_id: process.env.TESLA_CLIENT_ID,
       client_secret: process.env.TESLA_CLIENT_SECRET,
-      scope: 'openid vehicle_device_data vehicle_cmds vehicle_charging_cmds',
+      scope: 'openid vehicle_device_data vehicle_location',
       audience: FLEET_API,
     }),
   });

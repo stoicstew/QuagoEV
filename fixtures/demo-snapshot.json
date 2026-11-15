@@ -1,0 +1,594 @@
+{
+  "schemaVersion": 2,
+  "serverId": "quagoev-demo",
+  "revision": 1,
+  "generatedAt": 1794001320000,
+  "settings": {
+    "currency": "AUD",
+    "distanceUnit": "km",
+    "temperatureUnit": "C",
+    "timeZone": "Australia/Melbourne",
+    "homeRatePerKwh": 0.29,
+    "batteryCapacityKwh": null
+  },
+  "vehicles": [
+    {
+      "id": "demo-model-y",
+      "vin": null,
+      "name": "Model Y \u00b7 Sample",
+      "model": "Model Y",
+      "latest": {
+        "observedAt": 1794001200000,
+        "state": "parked",
+        "batteryLevel": 72,
+        "estimatedRangeKm": 330,
+        "odometerKm": 12482,
+        "outsideTempC": 18,
+        "chargingState": "Disconnected",
+        "chargerPowerKw": 0,
+        "latitude": null,
+        "longitude": null
+      }
+    }
+  ],
+  "trips": [
+    {
+      "id": "demo-trip-1-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793480700000,
+      "endTime": 1793482740000,
+      "distanceKm": 22.3,
+      "energyKwh": 3.37,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793480700000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793481600000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793482740000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-1-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793513100000,
+      "endTime": 1793515140000,
+      "distanceKm": 23.4,
+      "energyKwh": 3.74,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793513100000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793514000000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793515140000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-2-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793567100000,
+      "endTime": 1793569140000,
+      "distanceKm": 23.1,
+      "energyKwh": 3.49,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793567100000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793568000000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793569140000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-2-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793599500000,
+      "endTime": 1793601540000,
+      "distanceKm": 24.2,
+      "energyKwh": 3.87,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793599500000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793600400000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793601540000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-3-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793653500000,
+      "endTime": 1793655540000,
+      "distanceKm": 23.9,
+      "energyKwh": 3.61,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793653500000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793654400000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793655540000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-3-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793685900000,
+      "endTime": 1793687940000,
+      "distanceKm": 25.0,
+      "energyKwh": 4.0,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793685900000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793686800000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793687940000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-4-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793739900000,
+      "endTime": 1793741940000,
+      "distanceKm": 24.7,
+      "energyKwh": 3.73,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793739900000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793740800000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793741940000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-4-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793772300000,
+      "endTime": 1793774340000,
+      "distanceKm": 25.8,
+      "energyKwh": 4.13,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793772300000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793773200000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793774340000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-5-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793826300000,
+      "endTime": 1793828340000,
+      "distanceKm": 25.5,
+      "energyKwh": 3.85,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793826300000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793827200000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793828340000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-5-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793858700000,
+      "endTime": 1793860740000,
+      "distanceKm": 26.6,
+      "energyKwh": 4.26,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793858700000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793859600000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793860740000
+        }
+      ],
+      "tag": "business",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-6-0",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793912700000,
+      "endTime": 1793914740000,
+      "distanceKm": 26.3,
+      "energyKwh": 3.97,
+      "energySource": "estimated",
+      "startBattery": 80,
+      "endBattery": 74,
+      "route": [
+        {
+          "lat": -37.81,
+          "lng": 144.96,
+          "timestamp": 1793912700000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793913600000
+        },
+        {
+          "lat": -37.79,
+          "lng": 145.02,
+          "timestamp": 1793914740000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    },
+    {
+      "id": "demo-trip-6-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793945100000,
+      "endTime": 1793947140000,
+      "distanceKm": 27.4,
+      "energyKwh": 4.38,
+      "energySource": "estimated",
+      "startBattery": 70,
+      "endBattery": 64,
+      "route": [
+        {
+          "lat": -37.79,
+          "lng": 144.96,
+          "timestamp": 1793945100000
+        },
+        {
+          "lat": -37.805,
+          "lng": 144.99,
+          "timestamp": 1793946000000
+        },
+        {
+          "lat": -37.81,
+          "lng": 145.02,
+          "timestamp": 1793947140000
+        }
+      ],
+      "tag": "personal",
+      "notes": "Illustrative journey",
+      "incomplete": false
+    }
+  ],
+  "charges": [
+    {
+      "id": "demo-charge-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793453400000,
+      "endTime": 1793467800000,
+      "energyKwh": 25.7,
+      "startBattery": 38,
+      "endBattery": 80,
+      "maxPowerKw": 7.2,
+      "locationName": "Home",
+      "locationType": "home",
+      "cost": 7.45,
+      "costSource": "estimated",
+      "ratePerKwh": 0.29,
+      "incomplete": false
+    },
+    {
+      "id": "demo-charge-3",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793626200000,
+      "endTime": 1793640600000,
+      "energyKwh": 28.1,
+      "startBattery": 38,
+      "endBattery": 80,
+      "maxPowerKw": 7.2,
+      "locationName": "Home",
+      "locationType": "home",
+      "cost": 8.15,
+      "costSource": "estimated",
+      "ratePerKwh": 0.29,
+      "incomplete": false
+    },
+    {
+      "id": "demo-charge-5",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793799000000,
+      "endTime": 1793813400000,
+      "energyKwh": 30.5,
+      "startBattery": 38,
+      "endBattery": 80,
+      "maxPowerKw": 7.2,
+      "locationName": "Home",
+      "locationType": "home",
+      "cost": 8.84,
+      "costSource": "estimated",
+      "ratePerKwh": 0.29,
+      "incomplete": false
+    }
+  ],
+  "battery": [
+    {
+      "id": "demo-battery-1",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793469600000,
+      "odometerKm": 12068,
+      "batteryLevel": 80,
+      "fullRangeKm": 460.6
+    },
+    {
+      "id": "demo-battery-2",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793556000000,
+      "odometerKm": 12136,
+      "batteryLevel": 80,
+      "fullRangeKm": 460.2
+    },
+    {
+      "id": "demo-battery-3",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793642400000,
+      "odometerKm": 12204,
+      "batteryLevel": 80,
+      "fullRangeKm": 459.8
+    },
+    {
+      "id": "demo-battery-4",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793728800000,
+      "odometerKm": 12272,
+      "batteryLevel": 80,
+      "fullRangeKm": 459.4
+    },
+    {
+      "id": "demo-battery-5",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793815200000,
+      "odometerKm": 12340,
+      "batteryLevel": 80,
+      "fullRangeKm": 459.0
+    },
+    {
+      "id": "demo-battery-6",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793901600000,
+      "odometerKm": 12408,
+      "batteryLevel": 80,
+      "fullRangeKm": 458.6
+    },
+    {
+      "id": "demo-battery-7",
+      "vehicleId": "demo-model-y",
+      "timestamp": 1793988000000,
+      "odometerKm": 12476,
+      "batteryLevel": 80,
+      "fullRangeKm": 458.2
+    }
+  ],
+  "idles": [
+    {
+      "id": "demo-idle-1",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793451600000,
+      "endTime": 1793476800000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-2",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793538000000,
+      "endTime": 1793563200000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-3",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793624400000,
+      "endTime": 1793649600000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-4",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793710800000,
+      "endTime": 1793736000000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-5",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793797200000,
+      "endTime": 1793822400000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-6",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793883600000,
+      "endTime": 1793908800000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    },
+    {
+      "id": "demo-idle-7",
+      "vehicleId": "demo-model-y",
+      "startTime": 1793970000000,
+      "endTime": 1793995200000,
+      "energyKwh": null,
+      "state": "asleep",
+      "incomplete": false
+    }
+  ],
+  "collector": {
+    "mode": "paused",
+    "status": "paused",
+    "lastReceivedAt": 1794001200000,
+    "message": "Sample data \u2014 no vehicle connected",
+    "usage": {
+      "month": "2026-11",
+      "estimatedCostUsd": 0,
+      "limitUsd": 8,
+      "requests": 0,
+      "signals": 0
+    }
+  }
+}
